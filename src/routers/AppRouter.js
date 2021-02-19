@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { startLoadingNotes } from "../actions/notes";
 
 export const AppRouter = () => {
     //
@@ -30,16 +31,19 @@ export const AppRouter = () => {
         // en la autenticación del usuario, si la página se
         // recarga incluso detecta que el usuario está autenticado
         // y lo vuelve a autenticar
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             //
             // si existe la propiedad 'uid' es porque está autenticado
             if (user?.uid) {
                 //
                 // activar bandera que indica que el usuario está autenticado
                 setUserIsLogged(true);
-
+                //
+                // actualizar estado de autenticación del usuario
                 dispatch(login(user.uid, user.displayName));
-
+                //
+                // actualizar el estado de las notas y visualizarlas
+                dispatch(startLoadingNotes(user.uid));
             }
             else {
                 //
@@ -64,7 +68,7 @@ export const AppRouter = () => {
             //
             // este texto podríamos cambiar por alguna animación
             // agradable a los ojos del usuario
-            <h1>Espere...</h1>
+            <h1>Wait...</h1>
         );
     }
 

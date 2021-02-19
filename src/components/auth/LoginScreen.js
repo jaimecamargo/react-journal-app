@@ -14,9 +14,9 @@ export const LoginScreen = () => {
     // caso sólo deseamos la propiedad 'ui', este valor
     // se puede ver en la pestaña 'redux' de la extensión
     // de Chrome. aprovechamos y desestructuramos para
-    // sólo obtener el 'loading'.
+    // sólo obtener la propiedad 'loading'.
     // el 'json' que estamos leyendo del 'state' lo podemos
-    // ver en el archivo '/actions/ui.js'
+    // ver en el archivo '/reducers/uiReducer.js'
     const { loading } = useSelector(state => state.ui);
 
     const [ formValues, handleInputChange ] = useForm({
@@ -40,7 +40,9 @@ export const LoginScreen = () => {
         <>
             <h3 className="auth__title">Login</h3>
 
-            <form onSubmit={ handleLogin }>
+            <form
+                className="animate__animated animate__fadeIn"
+                onSubmit={ handleLogin }>
                 <input
                     type="text"
                     placeholder="Email"

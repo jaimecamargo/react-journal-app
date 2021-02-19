@@ -16,7 +16,7 @@ export const RegisterScreen = () => {
     // caso sólo deseamos la propiedad 'ui', este valor
     // se puede ver en la pestaña 'redux' de la extensión
     // de Chrome. aprovechamos y desestructuramos para
-    // sólo obtener el 'error'.
+    // sólo obtener la propiedad 'error'.
     // el 'json' que estamos leyendo del 'state' lo podemos
     // ver en el archivo '/actions/ui.js'
     const { error } = useSelector(state => state.ui);
@@ -75,7 +75,9 @@ export const RegisterScreen = () => {
         <>
             <h3 className="auth__title">Register</h3>
 
-            <form onSubmit={ handleRegister }>
+            <form
+                className="animate__animated animate__fadeIn"
+                onSubmit={ handleRegister }>
 
                 {   // mostramos de manera condicional el mensaje de error.
                     // sí 'error' es diferente de 'null' y '&&'

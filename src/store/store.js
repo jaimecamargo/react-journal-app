@@ -1,6 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import { authReducer } from "../reducers/authReducer";
 import { uiReducer } from "../reducers/uiReducer";
+import { notesReducer } from "../reducers/notesReducer";
 import thunk from "redux-thunk";
 
 const composeEnhacers = (
@@ -9,9 +10,10 @@ const composeEnhacers = (
                         ) || compose;
 
 const reducers = combineReducers({
-    auth: authReducer, // al poner los 'reducers' aquí en el 'store' hacemos que
-    ui: uiReducer      // los 'states' aparezcan en la pestaña 'Redux' de la
-                       // extensión de Google Chrome
+    auth: authReducer,  // al poner los 'reducers' aquí en el 'store' hacemos que
+    ui: uiReducer,      // los 'states' aparezcan en la pestaña 'Redux' de la
+                        // extensión de Google Chrome
+    notes: notesReducer
 });
 
 export const store = createStore(

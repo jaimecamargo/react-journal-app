@@ -2,6 +2,7 @@ import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 import { types } from "../types/types"
 import { finishLoading, startLoading } from "./ui";
+import { noteLogout } from "./notes";
 
 // cuando las 'acciones' que se van a realizar son asíncronas, es decir
 // se solicita su ejecución pero no se sabe cuándo éstas terminan,
@@ -117,11 +118,13 @@ export const startLogout = () => {
         await firebase.auth().signOut();
 
         dispatch(logout());
+        dispatch(noteLogout());
     }
 }
 
 export const logout = () => {
     return {
+        // obligatorio que el nombre del campo se llame 'type'
         type: types.logout
     }
 }
